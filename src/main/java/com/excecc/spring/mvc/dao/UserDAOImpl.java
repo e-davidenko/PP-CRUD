@@ -22,6 +22,7 @@ import java.util.List;
 
 @Repository
 @Component
+@Transactional
 public class UserDAOImpl implements UserDAO {
     @PersistenceContext
     private EntityManager entityManager;

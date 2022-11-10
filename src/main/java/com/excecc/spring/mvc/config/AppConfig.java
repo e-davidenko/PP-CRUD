@@ -49,6 +49,7 @@ public class AppConfig {
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();
+        properties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
         return properties;
     }
