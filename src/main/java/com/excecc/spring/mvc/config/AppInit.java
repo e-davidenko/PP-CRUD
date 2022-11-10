@@ -20,12 +20,15 @@ import javax.servlet.ServletException;
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
     // Метод, указывающий на класс конфигурации
     @Override
-    protected Class<?>[] getRootConfigClasses() {return null;}
+    protected Class<?>[] getRootConfigClasses() {
+        return null;
+    }
 
     // Добавление конфигурации, в которой инициализируем ViewResolver, для корректного отображения jsp.
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[]{AppConfig.class};}
+        return new Class<?>[]{AppConfig.class};
+    }
 
     /* Данный метод указывает url, на котором будет базироваться приложение */
     @Override
@@ -36,21 +39,18 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
-        FilterRegistration.Dynamic encodingFilter = aServletContext.addFilter("encodingFilter", // ДЛЯ КИРИ́ЛЛИЦЫ
-                new CharacterEncodingFilter());                                                    // ДЛЯ КИРИ́ЛЛИЦЫ
-        encodingFilter.setInitParameter("encoding", "UTF-8");                               // ДЛЯ КИРИ́ЛЛИЦЫ
-        encodingFilter.setInitParameter("forceEncoding", "true");                           // ДЛЯ КИРИ́ЛЛИЦЫ
-        encodingFilter.addMappingForUrlPatterns(null, true, "/*");             // ДЛЯ КИРИ́ЛЛИЦЫ
+        FilterRegistration.Dynamic encodingFilter = aServletContext.addFilter("encodingFilter",
+                new CharacterEncodingFilter());
+        encodingFilter.setInitParameter("encoding", "UTF-8");
+        encodingFilter.setInitParameter("forceEncoding", "true");
+        encodingFilter.addMappingForUrlPatterns(null, true, "/*");
         registerHiddenFieldFilter(aServletContext);
     }
 
     private void registerHiddenFieldFilter(ServletContext aContext) {
         aContext.addFilter("hiddenHttpMethodFilter",
-                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");
+                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null, true, "/*");
     }
-
-
-
 
 
 }
